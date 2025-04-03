@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de contacto</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <h1>Formulario de contacto - Local Storage</h1>
+    <form>
+        <div>
+            <label for="Nombre">Nombre:</label>
+            <input type="text" id="Nombre" name="Nombre" placeholder="Introduce tu nombre" autofocus>
+        </div>
+        <div> 
+            <label for="email" >Correo electrónico:</label>
+            <input type="email" id="email" name="email" placeholder="Introduce tu email">
+        </div>
+        <div> 
+            <textarea name="message" rows="10" cols="30" id="message"> Escribe algo sobre tí:</textarea>
+        </div>
+        <div>
+            <label for="url">Inserta una URL:</label>
+            <input type="url" id="url" name="url" placeholder="https://ejemplo.com">
+        </div>
+        <input type="submit" id="submit" value="Boton que guarda solo un usuario">
+        <input type="submit" id="submit1" value="Boton queusa JSON.parse() y JSON.stringify()">
+        <input type="submit" id="deleteStorage" value="Boton BORRAR localstorage">
+    </form>
+</body>
+</html>
