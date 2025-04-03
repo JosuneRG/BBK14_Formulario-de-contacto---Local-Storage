@@ -5,7 +5,9 @@ const campoEmail = document.getElementById('email');
 const campoMessage = document.getElementById('message');
 const campoUrl = document.getElementById('url');
 const btnSubmit = document.getElementById('submit');
-const btnSubmit1 = document.getElementById('submit1');
+
+
+
 // localStorage.setItem('Nombre', 'Jane')
 // localStorage.setItem('email', 'Jane')
 // localStorage.setItem('message', 'Jane')
@@ -43,7 +45,11 @@ function onSubmit(event) {
 //Llamamos a la funcion del boton
 btnSubmit.addEventListener('click',onSubmit);
 
+
+// 2 ------------------------------------------------------------------------------------------------
 //Pista: usa JSON.parse() y JSON.stringify() para guardar muchos datos usando la misma clave
+
+const btnSubmit1 = document.getElementById('submit1');
 function onSubmit1(event) {
     
     event.preventDefault()
@@ -66,7 +72,10 @@ function onSubmit1(event) {
 //Llamamos a la funcion del boton
 btnSubmit1.addEventListener('click',onSubmit1);
 
+
+// ---------------------------------------------------------------------------------
 //3 - Crea un botón para borrar todos los contactos guardados en Local Storage
+
 const btnDeleteStorage = document.getElementById('deleteStorage');
 
 function deleteStorage()
@@ -79,6 +88,62 @@ function deleteStorage()
 btnDeleteStorage.addEventListener('click',deleteStorage);
 
 
+//--------------------------------------------------------------------------------------------
+//4 - Guardar en Local Storage los datos de contacto enviados de cada usuario (ir guardandolos todos)
+
+const btnOnsubmint2  = document.getElementById('submit2');
+const listaContactos = document.getElementById('listaContactos');
+
+function save_N_User(event) {
+    
+    event.preventDefault()
+
+    // Obtener los valores de los campos
+    const name = campoNombre.value;
+    const email = campoEmail.value;
+    const message = campoMessage.value;
+    const url = campoUrl.value;
+
+    // Obtener los contactos previos desde localStorage o inicializar un array vacío
+    const contactos = JSON.parse(localStorage.getItem('contactos')) || [];
+    
+    // Crear un objeto con los datos del nuevo contacto
+    contactos.push({ name, email, message, url});
+
+    // Guardar la lista de contactos actualizada en localStorage
+    localStorage.setItem('contactos', JSON.stringify(contactos));
+
+    mostrarContactosDom();
+} 
 
 
+//--------------------------------------------------------------------------------------------
+// 5 -Mostrar los datos de los contactos guardados en el DOM, le llamaremos a esta funcion en la funcion anterior
 
+function mostrarContactosDom() {
+    
+    //limpiar la lista por si acaso 
+    listaContactos.innerHTML = "";
+
+     // Obtener contactos desde localStorage,es decir el array
+     const contactos = JSON.parse(localStorage.getItem('contactos')) || [];
+    
+     //recorremosel array
+    for (let i = 0; i < contactos.length; i++) 
+    {
+        const contacto = contactos[i];
+
+        const li = document.createElement('li');
+        
+        li.innerHTML = `<strong>${contacto.name}</strong> - ${contacto.email} <br>
+                        Mensaje: ${contacto.message} <br>
+                        URL: <a href="${contacto.url}" target="_blank">${contacto.url}</a>`;
+        listaContactos.appendChild(li);
+    }
+}
+
+// Mostrar los contactos guardados al cargar la página
+document.addEventListener('DOMContentLoaded', mostrarContactosDom);
+
+//Llamamos a la funcion del boton
+btnOnsubmint2.addEventListener('click',save_N_User);
